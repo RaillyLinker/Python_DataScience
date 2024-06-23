@@ -1,7 +1,8 @@
 import torch
 from torch import optim
 
-if __name__ == '__main__':
+
+def main():
     """
     [선형 회귀 모델 - 토치]
     - 아래 코드는 머신러닝의 기본적인 두가지 문제인 회귀 문제, 분류 문제 중 회귀 문제에 속하는 가장 단순한 선형 회귀 모델을
@@ -60,3 +61,7 @@ if __name__ == '__main__':
                   f"Weight : {model_weight.item():.3f}, "
                   f"Bias : {model_bias.item():.3f}, "
                   f"Cost : {model_loss:.3f}")
+
+
+if __name__ == '__main__':
+    main()

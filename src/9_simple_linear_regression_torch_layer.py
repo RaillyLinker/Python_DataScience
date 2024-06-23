@@ -2,10 +2,11 @@ import torch
 from torch import nn
 from torch import optim
 
-if __name__ == '__main__':
+
+def main():
     """
     [선형 회귀 모델 - 토치 레이어]
-    - 이 샘플이 이전의 토치 라이브러리를 사용한 선형 회귀 모델 샘플과 다른 점으론, 
+    - 이 샘플이 이전의 토치 라이브러리를 사용한 선형 회귀 모델 샘플과 다른 점으론,
         파라미터가 모델 레이어 객체 안에 포함되어 제공된다는 것이고,
         손실 함수도 토치 라이브러리에서 제공된 것을 사용하게 됩니다.
         앞으로 딥러닝 개발은 이처럼 레이어 단위로 예측 모델을 쌓아가며 만드는 것이 주가 될 것입니다.
@@ -58,3 +59,7 @@ if __name__ == '__main__':
             print(f"Epoch : {epoch + 1:4d}, "
                   f"Model : {list(model.parameters())}, "
                   f"Cost : {model_loss:.3f}")
+
+
+if __name__ == '__main__':
+    main()

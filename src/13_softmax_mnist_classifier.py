@@ -75,45 +75,46 @@ import torchvision.transforms as transforms
     각각의 이미지는 아래와 같이 28 픽셀 × 28 픽셀의 이미지입니다.
 """
 
-# [Cross Entropy 구현]
-# 앞서 이진 분류에서 Binary Cross Entropy 를 구현해봤는데,
-# 이번에는 다중 분류에 사용되는 Cross Entropy 를 구현해보겠습니다.
-
-# 3 행 5 열의 랜덤 실수 매트릭스 생성
-# ex : tensor([[0.3071, 0.2267, 0.3375, 0.1689, 0.1826],
-#         [0.0179, 0.4939, 0.2006, 0.3813, 0.8228],
-#         [0.7049, 0.0768, 0.2372, 0.0557, 0.3179]], requires_grad=True)
-z = torch.rand(3, 5, requires_grad=True)
-# 행마다 Softmax 를 수행 (행 내의 값들을 모두 더하여 1 이 되도록)
-# tensor([[0.2124, 0.1960, 0.2190, 0.1850, 0.1876],
-#         [0.1336, 0.2151, 0.1604, 0.1922, 0.2988],
-#         [0.2975, 0.1587, 0.1864, 0.1554, 0.2020]], grad_fn=<SoftmaxBackward0>)
-hypothesis = nn.functional.softmax(z, dim=1)
-
-# 5 열의 벡터 중 정답에 해당하는 인덱스 생성 (3 행이므로 3개 생성)
-# ex : tensor([4, 2, 1])
-y = torch.randint(5, (3,)).long()
-
-# 모든 원소가 0의 값을 가진 3 × 5 텐서 생성 후 정답 y 의 One Hot Vector 로 만들기
-# tensor([[0., 0., 0., 0., 1.],
-#         [0., 0., 1., 0., 0.],
-#         [0., 1., 0., 0., 0.]])
-y_one_hot = torch.zeros_like(hypothesis)
-y_one_hot.scatter_(1, y.unsqueeze(1), 1)
-
-# Cross Entropy 계산
-# ex : tensor(1.7815, grad_fn=<MeanBackward0>)
-cost = (y_one_hot * -torch.log(hypothesis)).sum(dim=1).mean()
-print(cost)
-
-# 토치에서 제공하는 손실 함수는 아래와 같이 작성하면 됩니다. (입력값에 주의하세요.)
-# ex : tensor(1.7815, grad_fn=<NllLossBackward0>)
-cost = nn.functional.cross_entropy(z, y)
-print(cost)
-
 
 # [MNIST 분류]
 def main():
+    # [Cross Entropy 구현]
+    # 앞서 이진 분류에서 Binary Cross Entropy 를 구현해봤는데,
+    # 이번에는 다중 분류에 사용되는 Cross Entropy 를 구현해보겠습니다.
+
+    # 3 행 5 열의 랜덤 실수 매트릭스 생성
+    # ex : tensor([[0.3071, 0.2267, 0.3375, 0.1689, 0.1826],
+    #         [0.0179, 0.4939, 0.2006, 0.3813, 0.8228],
+    #         [0.7049, 0.0768, 0.2372, 0.0557, 0.3179]], requires_grad=True)
+    z = torch.rand(3, 5, requires_grad=True)
+    # 행마다 Softmax 를 수행 (행 내의 값들을 모두 더하여 1 이 되도록)
+    # tensor([[0.2124, 0.1960, 0.2190, 0.1850, 0.1876],
+    #         [0.1336, 0.2151, 0.1604, 0.1922, 0.2988],
+    #         [0.2975, 0.1587, 0.1864, 0.1554, 0.2020]], grad_fn=<SoftmaxBackward0>)
+    hypothesis = nn.functional.softmax(z, dim=1)
+
+    # 5 열의 벡터 중 정답에 해당하는 인덱스 생성 (3 행이므로 3개 생성)
+    # ex : tensor([4, 2, 1])
+    y = torch.randint(5, (3,)).long()
+
+    # 모든 원소가 0의 값을 가진 3 × 5 텐서 생성 후 정답 y 의 One Hot Vector 로 만들기
+    # tensor([[0., 0., 0., 0., 1.],
+    #         [0., 0., 1., 0., 0.],
+    #         [0., 1., 0., 0., 0.]])
+    y_one_hot = torch.zeros_like(hypothesis)
+    y_one_hot.scatter_(1, y.unsqueeze(1), 1)
+
+    # Cross Entropy 계산
+    # ex : tensor(1.7815, grad_fn=<MeanBackward0>)
+    cost = (y_one_hot * -torch.log(hypothesis)).sum(dim=1).mean()
+    print(cost)
+
+    # 토치에서 제공하는 손실 함수는 아래와 같이 작성하면 됩니다. (입력값에 주의하세요.)
+    # ex : tensor(1.7815, grad_fn=<NllLossBackward0>)
+    cost = nn.functional.cross_entropy(z, y)
+    print(cost)
+
+    # [모델 학습 시작]
     # 사용 가능 디바이스
     device = tu.get_gpu_support_device(gpu_support=True)
 
@@ -159,13 +160,13 @@ def main():
         train_dataloader=train_dataloader,
         num_epochs=15,
         validation_dataloader=validation_dataloader,
-        check_point_file_save_directory_path="../_by_product_files/check_point_files/softmax_mnist_classifier_nn",
+        check_point_file_save_directory_path="../_by_product_files/check_point_files/softmax_mnist_classifier",
         # check_point_load_file_full_path="../_by_product_files/check_point_files/~/checkpoint(2024_02_29_17_51_09_330).pt",
         log_freq=1
     )
 
     # 모델 저장
-    model_file_save_directory_path = "../_by_product_files/torch_model_files/softmax_mnist_classifier_nn"
+    model_file_save_directory_path = "../_by_product_files/torch_model_files/softmax_mnist_classifier"
     if not os.path.exists(model_file_save_directory_path):
         os.makedirs(model_file_save_directory_path)
     save_file_full_path = tu.save_model_file(

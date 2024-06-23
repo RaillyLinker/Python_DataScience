@@ -283,9 +283,13 @@ def log_sample():
     plt.show()
 
 
-if __name__ == '__main__':
+def main():
     # linear_function_sample()
     # differential_sample()
     # exponential_sample()
     # sigmoid_sample()
     log_sample()
+
+
+if __name__ == '__main__':
+    main()

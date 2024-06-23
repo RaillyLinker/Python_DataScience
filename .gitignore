@@ -159,8 +159,11 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
+# Custom
+# 런타임 생성 파일
 /_by_product_files/**
 
+# 대용량 훈련 데이터
 /resources/datasets/30_sentencepiece_tokenizer_code/corpus.txt
 /resources/datasets/global/corpus.txt
 /resources/datasets/global/MNIST_data/**

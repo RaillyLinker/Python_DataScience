@@ -1,30 +1,28 @@
 [Anaconda 버전 확인 및 업데이트]
--
-    1. 버전 확인
-        > conda --version
+1. 버전 확인
+    >> conda --version
         
-    2. 업데이트
-        > conda update conda
+2. 업데이트
+    >> conda update conda
 
 
 [Anaconda 가상환경 설정 방법]
-- 
-    1. Anaconda Prompt 실행
+1. Anaconda Prompt 실행
     
-    2. 가상 환경 생성
-        > conda create -n forTorch python=3.11.8
+2. 가상 환경 생성
+    >> conda create -n forTorch python=3.11.8
         
-    3. 생성된 가상환경 리스트 확인
-        > conda env list
+3. 생성된 가상환경 리스트 확인
+    >> conda env list
         
-    4. 가상 환경 활성화
-        > conda activate forTorch
+4. 가상 환경 활성화
+    >> conda activate forTorch
         
-    5. 가상 환경 비활성화
-        > conda deactivate
+5. 가상 환경 비활성화
+    >> conda deactivate
     
-    6. 가상환경 삭제
-        > conda remove -n forTorch --all
+6. 가상환경 삭제
+    >> conda remove -n forTorch --all
 
 
 [Torch & CUDA 설치법]

@@ -5,7 +5,8 @@ import torch
 - 아래 코드는 Torch 버전, GPU 가속 등의 실습 환경을 확인하는 코드입니다.
 """
 
-if __name__ == '__main__':
+
+def main():
     # torch 버전 확인
     print("torch 버전 확인")
     print(torch.__version__)
@@ -24,3 +25,7 @@ if __name__ == '__main__':
     print(torch.backends.mps.is_built())
     print(torch.backends.mps.is_available())
     print("")
+
+
+if __name__ == '__main__':
+    main()

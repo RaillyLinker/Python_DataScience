@@ -23,7 +23,7 @@ def main():
     # 데이터셋 객체 생성 (ex : tensor([[-10., 100., 82.], ...], device = cpu), tensor([[327.7900], ...], device = cpu))
     # CSV 파일로 데이터셋 형성 (1 행에 라벨이 존재하고, 그 라벨로 x, y 데이터를 분류 합니다.)
     dataset = tu.CsvModelDataset(
-        csv_file_full_url="../resources/datasets/11_linear_regression_nn(basic_nn_form)/linear.csv",
+        csv_file_full_url="../resources/datasets/11_linear_regression(basic_nn_form)/linear.csv",
         x_column_labels=['x1', 'x2'],
         y_column_labels=['y1']
     )

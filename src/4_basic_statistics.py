@@ -588,10 +588,14 @@ def sample_significance_test():
         print("귀무가설을 기각하지 않습니다. 개발 중인 전구의 평균 수명이 기존 전구보다 유의미하게 길지 않습니다.")
 
 
-if __name__ == '__main__':
+def main():
     # discrete_data_sample()
     # continuous_data_sample()
     # two_dimensional_data_sample()
     # confidence_interval_sample()
     # parametric_significance_test()
     sample_significance_test()
+
+
+if __name__ == '__main__':
+    main()
