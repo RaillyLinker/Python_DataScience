@@ -1,0 +1,87 @@
+[Anaconda 버전 확인 및 업데이트]
+-
+    1. 버전 확인
+        > conda --version
+        
+    2. 업데이트
+        > conda update conda
+
+
+[Anaconda 가상환경 설정 방법]
+- 
+    1. Anaconda Prompt 실행
+    
+    2. 가상 환경 생성
+        > conda create -n forTorch python=3.11.8
+        
+    3. 생성된 가상환경 리스트 확인
+        > conda env list
+        
+    4. 가상 환경 활성화
+        > conda activate forTorch
+        
+    5. 가상 환경 비활성화
+        > conda deactivate
+    
+    6. 가상환경 삭제
+        > conda remove -n forTorch --all
+
+
+[Torch & CUDA 설치법]
+- Torch 에서 CUDA 를 사용하려면 먼저 CUDA 가 설치되어 있어야 합니다.
+	먼저 CUDA 설치법 부터 설명하는데,
+	CUDA 를 사용하지 않을 것이라면 해당 부분은 스킵하고 Torch 설치 부분에서 진행하면 됩니다.
+
+- CUDA 를 설치하기 전에 먼저 자신의 NVIDIA 그래픽카드 사양을 파악해야합니다.
+    https://en.wikipedia.org/wiki/CUDA
+    위 링크에서 
+    Compute Capability, GPU semiconductors and Nvidia GPU board products
+    부분의 리스트에서 본인의 GeForce 제품명을 찾고,
+    그에 해당하는 Compute capability(version) 을 확인합니다.
+    예를들어 7.5라고 합시다.
+    그러면 이 수치를 가지고 Compute Capability (CUDA SDK support vs. Microarchitecture) 항목의 표를 확인하여,
+    본인이 어느 구간에 속하는지를 확인합니다.
+    7.5라면, 현재 지원하는 것이 CUDA 10.0 부터 최신버전까지 호환이 되네요.
+
+- CUDA 사양을 파악했다면 바로 최신버전을 설치하는것이 아닙니다.
+    Torch 라이브러리에서 지원하는 버전을 또 확인해야 합니다.
+    https://pytorch.org/get-started/locally/
+    위 링크에서 Compute Platform 에서 지원하는 CUDA 버전을 확인하세요.
+    여기에 포함되지 않은 버전은 지원하지 않습니다.
+    현재는 CUDA 11.8, CUDA 12.1 이 지원이 됩니다.
+    최신버전인 CUDA 12.1 을 설치하면 됩니다.
+    torch 설치시에도 여기서 선택해서 나온 설치 명령어를 사용하면 되는데, 일단 CUDA 부터 설치하도록 합시다.
+
+- CUDA Toolkit 을 설치합시다.
+    https://developer.nvidia.com/cuda-toolkit-archive
+    위 링크에서 원하는 버전을 선택하고 다음 페이지에서 설치를 진행하면 됩니다.
+
+    다음으로 CuDNN 역시 설치해야합니다.
+    https://developer.nvidia.com/rdp/cudnn-archive
+    위 링크에서 본인이 설치한 CUDA 버전에 맞는 항목을 선택하고 파일을 다운받은 후,
+    압축을 해제하여 bin, include 등의 내용물들을 동일한 디렉토리가 존재하는 CUDA 설치 경로로 붙여넣어주면 됩니다.
+    (Windows11 에서 설치 경로는 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.1 위와 같습니다.)
+
+    마지막으로 CUDA 설치 경로의,
+    /bin
+    /extras/CUPTI/lib64
+    /include
+    경로를 환경변수로 등록하면 됩니다.
+
+- 이제 Torch 를 설치합니다.
+    먼저 conda update 를 위해
+    >> conda update -n base -c defaults conda
+    를 입력하고,
+    
+    앞서 언급한 https://pytorch.org/get-started/locally/ 사이트에서,
+    본인이 설치한 CUDA 등의 정보를 선택하여 나온 명령어,
+    저의 경우는
+    >> conda install pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch -c nvidia
+    를 입력하면 됩니다.
+
+
+[필요 라이브러리 모음]
+>> pip install numpy
+>> pip install matplotlib
+>> pip install pandas seaborn scipy
+>> pip install scikit-learn xgboost
