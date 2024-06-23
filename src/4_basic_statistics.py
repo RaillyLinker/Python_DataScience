@@ -1,3 +1,9 @@
+import numpy as np
+import pandas as pd
+import seaborn as sns
+from matplotlib import pyplot as plt
+from scipy import stats
+
 """
 [기본 통계]
 - 데이터 분석에 필요한 기본적인 통계학에 대한 정리입니다.
@@ -150,40 +156,36 @@
 - 아래의 예제 코드는, 주사위를 1000 번 던졌을 때 나타나는 1 에서 6 사이의 값에 대한 도수를 시각화 한 것입니다.
 """
 
-import numpy as np
-import pandas as pd
-import seaborn as sns
-from matplotlib import pyplot as plt
-from scipy import stats
 
-# # 데이터 생성
-# data = np.random.randint(1, 7, size=1000)  # 1부터 6 사이의 정수 1000개 생성
-#
-# # 데이터프레임 생성
-# df = pd.DataFrame(data, columns=['Value'])
-#
-# # 도수 분포표 생성
-# frequency_table = df['Value'].value_counts().sort_index()
-#
-# # 도수 분포표 출력
-# print("도수 분포표:")
-# print(frequency_table)
-#
-# # 도수 분포표를 막대 그래프로 시각화
-# plt.figure(figsize=(10, 6))
-# sns.barplot(x=frequency_table.index, y=frequency_table.values, color='skyblue')
-# plt.title('Frequency Distribution of Values')
-# plt.xlabel('Value')
-# plt.ylabel('Frequency')
-# plt.show()
-#
-# # 도수 분포표를 원 그래프로 시각화
-# plt.figure(figsize=(10, 10))
-# plt.pie(frequency_table.values, labels=frequency_table.index, autopct='%1.1f%%', startangle=140,
-#         colors=sns.color_palette('pastel'))
-# plt.title('Frequency Distribution of Values (Pie Chart)')
-# plt.axis('equal')  # 원형을 유지하기 위해 축을 'equal'로 설정
-# plt.show()
+def discrete_data_sample():
+    # 데이터 생성
+    data = np.random.randint(1, 7, size=1000)  # 1부터 6 사이의 정수 1000개 생성
+
+    # 데이터프레임 생성
+    df = pd.DataFrame(data, columns=['Value'])
+
+    # 도수 분포표 생성
+    frequency_table = df['Value'].value_counts().sort_index()
+
+    # 도수 분포표 출력
+    print("도수 분포표:")
+    print(frequency_table)
+
+    # 도수 분포표를 막대 그래프로 시각화
+    plt.figure(figsize=(10, 6))
+    sns.barplot(x=frequency_table.index, y=frequency_table.values, color='skyblue')
+    plt.title('Frequency Distribution of Values')
+    plt.xlabel('Value')
+    plt.ylabel('Frequency')
+    plt.show()
+
+    # 도수 분포표를 원 그래프로 시각화
+    plt.figure(figsize=(10, 10))
+    plt.pie(frequency_table.values, labels=frequency_table.index, autopct='%1.1f%%', startangle=140,
+            colors=sns.color_palette('pastel'))
+    plt.title('Frequency Distribution of Values (Pie Chart)')
+    plt.axis('equal')  # 원형을 유지하기 위해 축을 'equal'로 설정
+    plt.show()
 
 
 """
@@ -203,27 +205,30 @@ from scipy import stats
     이 선을 넘어서는 값은 이상치입니다.
 """
 
-# # 데이터 생성
-# np.random.seed(42)  # 재현성을 위해 시드 설정
-# data = np.random.normal(loc=50, scale=15, size=1000)  # 평균 50, 표준편차 15의 정규분포를 따르는 1000개의 데이터 생성
-#
-# # 데이터프레임 생성
-# df = pd.DataFrame(data, columns=['Value'])
-#
-# # 히스토그램 시각화
-# plt.figure(figsize=(10, 6))
-# sns.histplot(df['Value'], bins=30, kde=True, color='skyblue')  # bins: 막대 개수, kde: 커널 밀도 추정
-# plt.title('Histogram of Values')
-# plt.xlabel('Value')
-# plt.ylabel('Frequency')
-# plt.show()
-#
-# # 박스 플롯 시각화
-# plt.figure(figsize=(10, 6))
-# sns.boxplot(x=df['Value'], color='lightgreen')
-# plt.title('Box Plot of Values')
-# plt.xlabel('Value')
-# plt.show()
+
+def continuous_data_sample():
+    # 데이터 생성
+    np.random.seed(42)  # 재현성을 위해 시드 설정
+    data = np.random.normal(loc=50, scale=15, size=1000)  # 평균 50, 표준편차 15의 정규분포를 따르는 1000개의 데이터 생성
+
+    # 데이터프레임 생성
+    df = pd.DataFrame(data, columns=['Value'])
+
+    # 히스토그램 시각화
+    plt.figure(figsize=(10, 6))
+    sns.histplot(df['Value'], bins=30, kde=True, color='skyblue')  # bins: 막대 개수, kde: 커널 밀도 추정
+    plt.title('Histogram of Values')
+    plt.xlabel('Value')
+    plt.ylabel('Frequency')
+    plt.show()
+
+    # 박스 플롯 시각화
+    plt.figure(figsize=(10, 6))
+    sns.boxplot(x=df['Value'], color='lightgreen')
+    plt.title('Box Plot of Values')
+    plt.xlabel('Value')
+    plt.show()
+
 
 """
 (이차원 자료 및 시각화 기법)
@@ -239,37 +244,40 @@ from scipy import stats
     2차원 좌표 공간 위에 데이터를 점으로 나타내는 것입니다.
 """
 
-# # 데이터 생성
-# np.random.seed(42)  # 재현성을 위해 시드 설정
-# category1 = np.random.choice(['A', 'B', 'C'], size=1000)  # 'A', 'B', 'C' 범주 중 하나를 무작위로 선택
-# category2 = np.random.choice(['X', 'Y', 'Z'], size=1000)  # 'X', 'Y', 'Z' 범주 중 하나를 무작위로 선택
-# value1 = np.random.normal(loc=50, scale=15, size=1000)  # 연속형 변수 1
-# value2 = np.random.normal(loc=30, scale=10, size=1000)  # 연속형 변수 2
-#
-# # 데이터프레임 생성
-# df = pd.DataFrame({'Category1': category1, 'Category2': category2, 'Value1': value1, 'Value2': value2})
-#
-# # Contingency Table 생성
-# contingency_table = pd.crosstab(df['Category1'], df['Category2'])
-# print("Contingency Table:")
-# print(contingency_table)
-#
-# # Contingency Table 시각화
-# plt.figure(figsize=(10, 6))
-# sns.heatmap(contingency_table, annot=True, fmt='d', cmap='YlGnBu')
-# plt.title('Contingency Table Heatmap')
-# plt.xlabel('Category2')
-# plt.ylabel('Category1')
-# plt.show()
-#
-# # Scatter Plot 시각화
-# plt.figure(figsize=(10, 6))
-# sns.scatterplot(x='Value1', y='Value2', hue='Category1', style='Category2', data=df, palette='deep')
-# plt.title('Scatter Plot of Value1 vs Value2')
-# plt.xlabel('Value1')
-# plt.ylabel('Value2')
-# plt.legend(title='Categories')
-# plt.show()
+
+def two_dimensional_data_sample():
+    # 데이터 생성
+    np.random.seed(42)  # 재현성을 위해 시드 설정
+    category1 = np.random.choice(['A', 'B', 'C'], size=1000)  # 'A', 'B', 'C' 범주 중 하나를 무작위로 선택
+    category2 = np.random.choice(['X', 'Y', 'Z'], size=1000)  # 'X', 'Y', 'Z' 범주 중 하나를 무작위로 선택
+    value1 = np.random.normal(loc=50, scale=15, size=1000)  # 연속형 변수 1
+    value2 = np.random.normal(loc=30, scale=10, size=1000)  # 연속형 변수 2
+
+    # 데이터프레임 생성
+    df = pd.DataFrame({'Category1': category1, 'Category2': category2, 'Value1': value1, 'Value2': value2})
+
+    # Contingency Table 생성
+    contingency_table = pd.crosstab(df['Category1'], df['Category2'])
+    print("Contingency Table:")
+    print(contingency_table)
+
+    # Contingency Table 시각화
+    plt.figure(figsize=(10, 6))
+    sns.heatmap(contingency_table, annot=True, fmt='d', cmap='YlGnBu')
+    plt.title('Contingency Table Heatmap')
+    plt.xlabel('Category2')
+    plt.ylabel('Category1')
+    plt.show()
+
+    # Scatter Plot 시각화
+    plt.figure(figsize=(10, 6))
+    sns.scatterplot(x='Value1', y='Value2', hue='Category1', style='Category2', data=df, palette='deep')
+    plt.title('Scatter Plot of Value1 vs Value2')
+    plt.xlabel('Value1')
+    plt.ylabel('Value2')
+    plt.legend(title='Categories')
+    plt.show()
+
 
 """
 (추정)
@@ -338,60 +346,63 @@ from scipy import stats
     이 신뢰구간입니다.
 """
 
-# # 모집단의 설정
-# population_mean = 50
-# population_std = 30
-# population_size = 10000
-#
-# # 모집단 데이터 생성
-# population_data = np.random.normal(population_mean, population_std, population_size)
-#
-# # 표본 크기와 신뢰수준 설정
-# sample_size = 100
-# confidence_level = 0.95
-#
-# # 표본 추출
-# sample = np.random.choice(population_data, size=sample_size, replace=False)
-#
-# # 표본 평균과 표준편차 계산
-# sample_mean = np.mean(sample)
-# sample_std = np.std(sample, ddof=1)
-#
-# # 신뢰구간 계산
-# confidence_interval = stats.t.interval(
-#     confidence_level,
-#     df=sample_size-1,
-#     loc=sample_mean,
-#     scale=sample_std/np.sqrt(sample_size)
-# )
-#
-# # 그래프 그리기
-# plt.figure(figsize=(10, 6))
-#
-# # 모집단 분포 시각화
-# sns.histplot(population_data, kde=True, color='gray', label='Population', alpha=0.3)
-#
-# # 표본 데이터 시각화
-# sns.histplot(sample, kde=True, color='blue', label='Sample', alpha=0.3)
-#
-# # 신뢰구간 시각화
-# plt.axvline(confidence_interval[0], color='red', linestyle='--', label='Confidence Interval')
-# plt.axvline(confidence_interval[1], color='red', linestyle='--')
-#
-# # 표본 평균 시각화
-# plt.axvline(sample_mean, color='blue', linestyle='-', label='Sample Mean')
-#
-# # 모집단 평균 시각화
-# plt.axvline(population_mean, color='green', linestyle='-', label='Population Mean')
-#
-# # 그래프 제목과 레이블 설정
-# plt.title(f'Sample Mean and {confidence_level*100}% Confidence Interval')
-# plt.xlabel('Value')
-# plt.ylabel('Frequency')
-# plt.legend()
-#
-# # 그래프 표시
-# plt.show()
+
+def confidence_interval_sample():
+    # 모집단의 설정
+    population_mean = 50
+    population_std = 30
+    population_size = 10000
+
+    # 모집단 데이터 생성
+    population_data = np.random.normal(population_mean, population_std, population_size)
+
+    # 표본 크기와 신뢰수준 설정
+    sample_size = 100
+    confidence_level = 0.95
+
+    # 표본 추출
+    sample = np.random.choice(population_data, size=sample_size, replace=False)
+
+    # 표본 평균과 표준편차 계산
+    sample_mean = np.mean(sample)
+    sample_std = np.std(sample, ddof=1)
+
+    # 신뢰구간 계산
+    confidence_interval = stats.t.interval(
+        confidence_level,
+        df=sample_size - 1,
+        loc=sample_mean,
+        scale=sample_std / np.sqrt(sample_size)
+    )
+
+    # 그래프 그리기
+    plt.figure(figsize=(10, 6))
+
+    # 모집단 분포 시각화
+    sns.histplot(population_data, kde=True, color='gray', label='Population', alpha=0.3)
+
+    # 표본 데이터 시각화
+    sns.histplot(sample, kde=True, color='blue', label='Sample', alpha=0.3)
+
+    # 신뢰구간 시각화
+    plt.axvline(confidence_interval[0], color='red', linestyle='--', label='Confidence Interval')
+    plt.axvline(confidence_interval[1], color='red', linestyle='--')
+
+    # 표본 평균 시각화
+    plt.axvline(sample_mean, color='blue', linestyle='-', label='Sample Mean')
+
+    # 모집단 평균 시각화
+    plt.axvline(population_mean, color='green', linestyle='-', label='Population Mean')
+
+    # 그래프 제목과 레이블 설정
+    plt.title(f'Sample Mean and {confidence_level * 100}% Confidence Interval')
+    plt.xlabel('Value')
+    plt.ylabel('Frequency')
+    plt.legend()
+
+    # 그래프 표시
+    plt.show()
+
 
 """
 (통계적 가설검정(statistical hypothesis testing))
@@ -488,22 +499,25 @@ from scipy import stats
     유의 확률 (p-value) 은 약 0.0228 입니다.
 """
 
-# alpha = 0.05
-# z_critical = stats.norm.ppf(1 - alpha)
-# print(z_critical)
-#
-# # 주어진 값
-# mu_0 = 1200  # 귀무가설의 평균
-# x_bar = 1240  # 표본 평균
-# sigma = 100  # 모집단 표준편차
-# n = 25  # 표본 크기
-#
-# # 검정 통계량 계산
-# z = (x_bar - mu_0) / (sigma / (n ** 0.5))
-#
-# # 유의확률 계산
-# p_value = 1 - stats.norm.cdf(z)
-# print(p_value)
+
+def parametric_significance_test():
+    alpha = 0.05
+    z_critical = stats.norm.ppf(1 - alpha)
+    print(z_critical)
+
+    # 주어진 값
+    mu_0 = 1200  # 귀무가설의 평균
+    x_bar = 1240  # 표본 평균
+    sigma = 100  # 모집단 표준편차
+    n = 25  # 표본 크기
+
+    # 검정 통계량 계산
+    z = (x_bar - mu_0) / (sigma / (n ** 0.5))
+
+    # 유의확률 계산
+    p_value = 1 - stats.norm.cdf(z)
+    print(p_value)
+
 
 """
 - 위에서 기각역은 1.6448536269514722, 유의확률은 0.02275013194817921 로 계산되므로,
@@ -540,33 +554,44 @@ from scipy import stats
         유의 확률을 구하고 가설검증을 해봅시다.
 """
 
-# # 주어진 데이터
-# data = np.array([2000, 1975, 1900, 2000, 1950, 1850, 1950, 2100, 1975])
-#
-# # 표본 평균과 표본 표준편차 계산
-# sample_mean = np.mean(data)
-# sample_std = np.std(data, ddof=1)  # 표본 표준편차이므로 자유도 1
-#
-# # 가설 검정에 필요한 값들
-# mu_0 = 1950  # 귀무가설의 평균
-# n = len(data)  # 표본 크기
-#
-# # t-검정 통계량 계산
-# t_stat = (sample_mean - mu_0) / (sample_std / np.sqrt(n))
-#
-# # 유의 확률(p-value) 계산
-# p_value = 1 - stats.t.cdf(t_stat, df=n-1)
-#
-# # 결과 출력
-# print("표본 평균:", sample_mean)
-# print("표본 표준편차:", sample_std)
-# print("t-검정 통계량:", t_stat)
-# print("유의 확률(p-value):", p_value)
-#
-# # 유의 수준
-# alpha = 0.05
-#
-# if p_value < alpha:
-#     print("귀무가설을 기각합니다. 개발 중인 전구의 평균 수명이 기존 전구보다 유의미하게 깁니다.")
-# else:
-#     print("귀무가설을 기각하지 않습니다. 개발 중인 전구의 평균 수명이 기존 전구보다 유의미하게 길지 않습니다.")
+
+def sample_significance_test():
+    # 주어진 데이터
+    data = np.array([2000, 1975, 1900, 2000, 1950, 1850, 1950, 2100, 1975])
+
+    # 표본 평균과 표본 표준편차 계산
+    sample_mean = np.mean(data)
+    sample_std = np.std(data, ddof=1)  # 표본 표준편차이므로 자유도 1
+
+    # 가설 검정에 필요한 값들
+    mu_0 = 1950  # 귀무가설의 평균
+    n = len(data)  # 표본 크기
+
+    # t-검정 통계량 계산
+    t_stat = (sample_mean - mu_0) / (sample_std / np.sqrt(n))
+
+    # 유의 확률(p-value) 계산
+    p_value = 1 - stats.t.cdf(t_stat, df=n - 1)
+
+    # 결과 출력
+    print("표본 평균:", sample_mean)
+    print("표본 표준편차:", sample_std)
+    print("t-검정 통계량:", t_stat)
+    print("유의 확률(p-value):", p_value)
+
+    # 유의 수준
+    alpha = 0.05
+
+    if p_value < alpha:
+        print("귀무가설을 기각합니다. 개발 중인 전구의 평균 수명이 기존 전구보다 유의미하게 깁니다.")
+    else:
+        print("귀무가설을 기각하지 않습니다. 개발 중인 전구의 평균 수명이 기존 전구보다 유의미하게 길지 않습니다.")
+
+
+if __name__ == '__main__':
+    # discrete_data_sample()
+    # continuous_data_sample()
+    # two_dimensional_data_sample()
+    # confidence_interval_sample()
+    # parametric_significance_test()
+    sample_significance_test()

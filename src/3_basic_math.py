@@ -1,3 +1,6 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
 """
 [딥러닝 기본 수학]
 - 여기선 딥러닝에 사용되는 가장 기본적인 수학 및, 본 예시 리스트를 이해하는데 있어 필요한 수학적 지식에 대해 정리 하겠습니다.
@@ -21,40 +24,40 @@
     절편인 b 의 경우는 x 가 0 일 때의 y 의 초기값으로 생각하면 됩니다.
 """
 
-import matplotlib.pyplot as plt
-import numpy as np
 
-# # x 값 생성 (-10부터 10까지 0.1 간격으로)
-# x = np.arange(-10, 10, 0.1)
-# # 일차함수 식
-# y = 2 * x + 3
-# # 그래프 그리기
-# plt.plot(x, y, label=f'2x + 3')
-# plt.title('Linear Function')
-# plt.xlabel('x')
-# plt.ylabel('y')
-# plt.axhline(0, color='black', linewidth=0.5)
-# plt.axvline(0, color='black', linewidth=0.5)
-# plt.grid(color='gray', linestyle='--', linewidth=0.5)
-# plt.legend()
-# plt.show()
-#
-# # (이차함수의 그래프)
-# # 이차함수 그래프를 본다면 아래(기울기가 0보다 클 때)로 불룩한 토기 모양입니다.
-# # x 값 생성 (-10부터 10까지 0.1 간격으로)
-# x = np.arange(-10, 10, 0.1)
-# # 일차함수 식
-# y = x ** 2
-# # 그래프 그리기
-# plt.plot(x, y, label=f'x ** 2')
-# plt.title('Quadratic Function')
-# plt.xlabel('x')
-# plt.ylabel('y')
-# plt.axhline(0, color='black', linewidth=0.5)
-# plt.axvline(0, color='black', linewidth=0.5)
-# plt.grid(color='gray', linestyle='--', linewidth=0.5)
-# plt.legend()
-# plt.show()
+def linear_function_sample():
+    # x 값 생성 (-10부터 10까지 0.1 간격으로)
+    x = np.arange(-10, 10, 0.1)
+    # 일차함수 식
+    y = 2 * x + 3
+    # 그래프 그리기
+    plt.plot(x, y, label=f'2x + 3')
+    plt.title('Linear Function')
+    plt.xlabel('x')
+    plt.ylabel('y')
+    plt.axhline(0, color='black', linewidth=0.5)
+    plt.axvline(0, color='black', linewidth=0.5)
+    plt.grid(color='gray', linestyle='--', linewidth=0.5)
+    plt.legend()
+    plt.show()
+
+    # (이차함수의 그래프)
+    # 이차함수 그래프를 본다면 아래(기울기가 0보다 클 때)로 불룩한 토기 모양입니다.
+    # x 값 생성 (-10부터 10까지 0.1 간격으로)
+    x = np.arange(-10, 10, 0.1)
+    # 일차함수 식
+    y = x ** 2
+    # 그래프 그리기
+    plt.plot(x, y, label=f'x ** 2')
+    plt.title('Quadratic Function')
+    plt.xlabel('x')
+    plt.ylabel('y')
+    plt.axhline(0, color='black', linewidth=0.5)
+    plt.axvline(0, color='black', linewidth=0.5)
+    plt.grid(color='gray', linestyle='--', linewidth=0.5)
+    plt.legend()
+    plt.show()
+
 
 """
 (미분)
@@ -102,43 +105,44 @@ import numpy as np
     이렇게 된다면 이 함수의 미분값은,
     가장 안쪽의 내부함수의 미분 값 * 외곽 미분 값 * .... 이렇게 되는 것입니다.
 """
-# # (미분 결과 그래프)
-# # 특정 미분 위치에서 미분을 수행한 결과를 그래프로 나타냅니다.
-# # 미분 위치
-# differentiation_x = 7
-#
-#
-# # 이차 함수 그래프
-# def quadratic_function(x):
-#     return x ** 2
-#
-#
-# # 미분 함수
-# def derivative_quadratic(x):
-#     return 2 * x
-#
-#
-# # x 값 생성 (-10부터 10까지 0.1 간격으로)
-# x_positive = np.arange(0, 10, 0.1)
-# # 이차함수 값 계산 (음수 부분 제외)
-# y_positive = quadratic_function(x_positive)
-# # 미분값 계산 (x=7에서의 미분값)
-# derivative_at_x7 = derivative_quadratic(differentiation_x)
-# # 미분값을 이용하여 접선 계산
-# tangent_line_at_x7_positive = derivative_at_x7 * (x_positive - differentiation_x) + quadratic_function(
-#     differentiation_x)
-# # 그래프 그리기
-# plt.plot(x_positive, y_positive, label=f'x ** 2 (positive)')
-# plt.plot(x_positive, tangent_line_at_x7_positive, label=f'Tangent at x=7', linestyle='--', color='red')
-# plt.scatter(differentiation_x, quadratic_function(differentiation_x), color='red')  # 해당 점 표시
-# plt.title('Quadratic Function and Tangent at x=7 (positive)')
-# plt.xlabel('x')
-# plt.ylabel('y')
-# plt.axhline(0, color='black', linewidth=0.5)
-# plt.axvline(0, color='black', linewidth=0.5)
-# plt.grid(color='gray', linestyle='--', linewidth=0.5)
-# plt.legend()
-# plt.show()
+
+
+def differential_sample():
+    # (미분 결과 그래프)
+    # 특정 미분 위치에서 미분을 수행한 결과를 그래프로 나타냅니다.
+    # 미분 위치
+    differentiation_x = 7
+
+    # 이차 함수 그래프
+    def quadratic_function(x):
+        return x ** 2
+
+    # 미분 함수
+    def derivative_quadratic(x):
+        return 2 * x
+
+    # x 값 생성 (-10부터 10까지 0.1 간격으로)
+    x_positive = np.arange(0, 10, 0.1)
+    # 이차함수 값 계산 (음수 부분 제외)
+    y_positive = quadratic_function(x_positive)
+    # 미분값 계산 (x=7에서의 미분값)
+    derivative_at_x7 = derivative_quadratic(differentiation_x)
+    # 미분값을 이용하여 접선 계산
+    tangent_line_at_x7_positive = derivative_at_x7 * (x_positive - differentiation_x) + quadratic_function(
+        differentiation_x)
+    # 그래프 그리기
+    plt.plot(x_positive, y_positive, label=f'x ** 2 (positive)')
+    plt.plot(x_positive, tangent_line_at_x7_positive, label=f'Tangent at x=7', linestyle='--', color='red')
+    plt.scatter(differentiation_x, quadratic_function(differentiation_x), color='red')  # 해당 점 표시
+    plt.title('Quadratic Function and Tangent at x=7 (positive)')
+    plt.xlabel('x')
+    plt.ylabel('y')
+    plt.axhline(0, color='black', linewidth=0.5)
+    plt.axvline(0, color='black', linewidth=0.5)
+    plt.grid(color='gray', linestyle='--', linewidth=0.5)
+    plt.legend()
+    plt.show()
+
 
 """
 (지수와 지수함수)
@@ -154,24 +158,28 @@ import numpy as np
     
 - 아래는 밑의 값이 1 보다 클 경우와 0보다 크고 1 보다 작을 때의 경우를 나타낸 지수함수의 그래프입니다.
 """
-# # x 값 생성
-# x = np.linspace(-2, 2, 400)
-# # a > 1 일 때의 지수함수 그래프 (a=2)
-# y1 = 2 ** x
-# # 0 < a < 1 일 때의 지수함수 그래프 (a=0.5)
-# y2 = 0.5 ** x
-# # 그래프 그리기
-# plt.plot(x, y1, label=r'$y=2^x$ (a > 1)')
-# plt.plot(x, y2, label=r'$y=0.5^x$ (0 < a < 1)')
-# # 그래프 스타일 및 레이블 설정
-# plt.title('Exponential Functions with Different Values of a')
-# plt.xlabel('x')
-# plt.ylabel('y')
-# plt.axhline(0, color='black', linewidth=0.5)
-# plt.axvline(0, color='black', linewidth=0.5)
-# plt.grid(color='gray', linestyle='--', linewidth=0.5)
-# plt.legend()
-# plt.show()
+
+
+def exponential_sample():
+    # x 값 생성
+    x = np.linspace(-2, 2, 400)
+    # a > 1 일 때의 지수함수 그래프 (a=2)
+    y1 = 2 ** x
+    # 0 < a < 1 일 때의 지수함수 그래프 (a=0.5)
+    y2 = 0.5 ** x
+    # 그래프 그리기
+    plt.plot(x, y1, label=r'$y=2^x$ (a > 1)')
+    plt.plot(x, y2, label=r'$y=0.5^x$ (0 < a < 1)')
+    # 그래프 스타일 및 레이블 설정
+    plt.title('Exponential Functions with Different Values of a')
+    plt.xlabel('x')
+    plt.ylabel('y')
+    plt.axhline(0, color='black', linewidth=0.5)
+    plt.axvline(0, color='black', linewidth=0.5)
+    plt.grid(color='gray', linestyle='--', linewidth=0.5)
+    plt.legend()
+    plt.show()
+
 
 """
 [시그모이드 함수]
@@ -184,24 +192,27 @@ import numpy as np
     
 - 이는 머신러닝에서 x 를 0 에서 1 사이의 실수값으로 변환하는 데이터 정제에 사용하는 함수로 사용됩니다.
 """
-# def sigmoid(x):
-#     return 1 / (1 + np.exp(-x))
-#
-#
-# # -7부터 7까지 0.1 간격으로 x 값을 생성
-# x_values = np.arange(-7, 7, 0.1)
-#
-# # 시그모이드 함수 계산
-# y_values = sigmoid(x_values)
-#
-# # 그래프 그리기
-# plt.plot(x_values, y_values, label='Sigmoid Function')
-# plt.title('Sigmoid Function')
-# plt.xlabel('x')
-# plt.ylabel('sigmoid(x)')
-# plt.legend()
-# plt.grid(True)
-# plt.show()
+
+
+def sigmoid_sample():
+    def sigmoid(x):
+        return 1 / (1 + np.exp(-x))
+
+    # -7부터 7까지 0.1 간격으로 x 값을 생성
+    x_values = np.arange(-7, 7, 0.1)
+
+    # 시그모이드 함수 계산
+    y_values = sigmoid(x_values)
+
+    # 그래프 그리기
+    plt.plot(x_values, y_values, label='Sigmoid Function')
+    plt.title('Sigmoid Function')
+    plt.xlabel('x')
+    plt.ylabel('sigmoid(x)')
+    plt.legend()
+    plt.grid(True)
+    plt.show()
+
 
 """
 [로그와 로그 함수]
@@ -223,48 +234,58 @@ import numpy as np
     추후 이것을 통해 로지스틱 회귀와 같은 확률 모델을 학습 시킬 때 사용하는 Cross Entropy 손실 함수를 설명 할 수 있으므로,
     아래 코드의 그래프를 확인하세요.
 """
-# # 로그 함수의 정의
-# def logarithmic_function(x, base):
-#     return np.log(x) / np.log(base)
-#
-#
-# def neg_logarithmic_function(x, base):
-#     return -np.log(x) / np.log(base)
-#
-#
-# def neg_logarithmic_function_rev(x, base):
-#     return -np.log(1-x) / np.log(base)
-#
-#
-# # 그래프의 x 범위 설정
-# x_values = np.linspace(0.01, 1, 100)
-#
-# # 베이스 값 설정 (양의 실수, 1이 아닌 값)
-# base_value = 2.718
-#
-# # 함수 그래프 그리기
-# plt.figure(figsize=(18, 6))
-#
-# # 로그 함수 그래프
-# plt.subplot(1, 3, 1)
-# plt.plot(x_values, logarithmic_function(x_values, base_value), label=f'Logarithmic (base={base_value})')
-# plt.xlabel('x')
-# plt.ylabel('y')
-# plt.legend()
-#
-# # -log 함수 그래프
-# plt.subplot(1, 3, 2)
-# plt.plot(x_values, neg_logarithmic_function(x_values, base_value), label=f'Negative Logarithmic (base={base_value})')
-# plt.xlabel('x')
-# plt.ylabel('y')
-# plt.legend()
-#
-# # -log 함수 그래프
-# plt.subplot(1, 3, 3)
-# plt.plot(x_values, neg_logarithmic_function_rev(x_values, base_value), label=f'Negative Logarithmic Rev (base={base_value})')
-# plt.xlabel('x')
-# plt.ylabel('y')
-# plt.legend()
-#
-# plt.tight_layout()
-# plt.show()
+
+
+def log_sample():
+    # 로그 함수의 정의
+    def logarithmic_function(x, base):
+        return np.log(x) / np.log(base)
+
+    def neg_logarithmic_function(x, base):
+        return -np.log(x) / np.log(base)
+
+    def neg_logarithmic_function_rev(x, base):
+        return -np.log(1 - x) / np.log(base)
+
+    # 그래프의 x 범위 설정
+    x_values = np.linspace(0.01, 1, 100)
+
+    # 베이스 값 설정 (양의 실수, 1이 아닌 값)
+    base_value = 2.718
+
+    # 함수 그래프 그리기
+    plt.figure(figsize=(18, 6))
+
+    # 로그 함수 그래프
+    plt.subplot(1, 3, 1)
+    plt.plot(x_values, logarithmic_function(x_values, base_value), label=f'Logarithmic (base={base_value})')
+    plt.xlabel('x')
+    plt.ylabel('y')
+    plt.legend()
+
+    # -log 함수 그래프
+    plt.subplot(1, 3, 2)
+    plt.plot(x_values, neg_logarithmic_function(x_values, base_value),
+             label=f'Negative Logarithmic (base={base_value})')
+    plt.xlabel('x')
+    plt.ylabel('y')
+    plt.legend()
+
+    # -log 함수 그래프
+    plt.subplot(1, 3, 3)
+    plt.plot(x_values, neg_logarithmic_function_rev(x_values, base_value),
+             label=f'Negative Logarithmic Rev (base={base_value})')
+    plt.xlabel('x')
+    plt.ylabel('y')
+    plt.legend()
+
+    plt.tight_layout()
+    plt.show()
+
+
+if __name__ == '__main__':
+    # linear_function_sample()
+    # differential_sample()
+    # exponential_sample()
+    # sigmoid_sample()
+    log_sample()
