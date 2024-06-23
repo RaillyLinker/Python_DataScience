@@ -28,7 +28,7 @@ def get_gpu_support_device(
 def save_model_file(
         # 파일로 저장할 모델 객체
         model,
-        # 생성된 모델 파일을 저장할 폴더 위치 (ex : "../_torch_model_files")
+        # 생성된 모델 파일을 저장할 폴더 위치 (ex : "../_by_product_files/torch_model_files")
         model_file_save_directory_path
 ):
     save_file_full_path = f"{model_file_save_directory_path}/model({datetime.now().strftime('%Y_%m_%d_%H_%M_%S_%f')[:-3]}).pt"

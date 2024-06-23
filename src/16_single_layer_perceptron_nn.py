@@ -60,13 +60,13 @@ def main():
         train_dataloader=train_dataloader,
         num_epochs=10000,
         validation_dataloader=validation_dataloader,
-        check_point_file_save_directory_path="../_check_point_files/single_layer_perceptron",
-        # check_point_load_file_full_path="../_check_point_files/~/checkpoint(2024_02_29_17_51_09_330).pt",
+        check_point_file_save_directory_path="../_by_product_files/check_point_files/single_layer_perceptron",
+        # check_point_load_file_full_path="../_by_product_files/check_point_files/~/checkpoint(2024_02_29_17_51_09_330).pt",
         log_freq=1000
     )
 
     # 모델 저장
-    model_file_save_directory_path = "../_torch_model_files/single_layer_perceptron"
+    model_file_save_directory_path = "../_by_product_files/torch_model_files/single_layer_perceptron"
     if not os.path.exists(model_file_save_directory_path):
         os.makedirs(model_file_save_directory_path)
     save_file_full_path = tu.save_model_file(
